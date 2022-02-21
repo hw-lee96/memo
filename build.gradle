@@ -33,12 +33,19 @@ repositories {
 dependencies {
 //    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
 //    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
-
-//    compile('org.springframework.boot:spring-boot-starter-web')
-    // gradle 7 이상 부터는 compile -> implementation, testCompile -> testImplementation
-    implementation('org.springframework.boot:spring-boot-starter-web')
 //    testCompile('org.springframework.boot:spring-boot-starter-test')
+//    compile('org.springframework.boot:spring-boot-starter-web')
+
+//  gradle 7 이상 부터는 compile -> implementation, testCompile -> testImplementation
+    implementation('org.springframework.boot:spring-boot-starter-web')
     testImplementation('org.springframework.boot:spring-boot-starter-test')
+
+//  롬복 추가
+//  implementation('org.projectlombok:lombok')
+//  gradle 버전 5 이상에서는 아래와 같이 추가해줘야됨
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+
 }
 
 //test {
