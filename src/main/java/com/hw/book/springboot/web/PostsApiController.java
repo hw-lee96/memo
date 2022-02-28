@@ -5,6 +5,7 @@ import com.hw.book.springboot.web.dto.PostsResponseDto;
 import com.hw.book.springboot.web.dto.PostsSaveRequestDto;
 import com.hw.book.springboot.web.dto.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 // Controller 와 Serivce 에서 @Autowired가 없는 이유
@@ -30,5 +31,11 @@ public class PostsApiController {
     @GetMapping("/api/v1/posts/{id}")
     public PostsResponseDto findById(@PathVariable Long id) {
         return postsService.findById(id);
+    }
+
+    @DeleteMapping("/api/v1/posts/{id}")
+    public Long delete (@PathVariable Long id) {
+        postsService.delete(id);
+        return id;
     }
 }
