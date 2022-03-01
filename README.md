@@ -122,3 +122,14 @@
  
  - 머스테치
    - 다양한 언어를 지원하는 심플한 템플릿 엔진
+
+
+4.1.2. 하 이 세팅이 있었나. 왜 파일을 못 찾지
+ - footer.mustache 에서 index.js 파일을 못 찾아서 자꾸 에러 뜸
+ - 별의 별 짓을 다 했는데 안됨
+ - application.properties 파일에 아래 내용도 추가해봄
+   - spring.resources.static-locations=classpath:/static/
+ - 어 갑자기 됨
+ - 에러 보려고 저거 지우고 재가동 함
+ - 근데 잘 됨(?)
+ - 가설 중 하나가 '저 설정으로 인해 파일이 잡혔다.' 인데 나중에 또 안되면 다시 추가해봐야지
