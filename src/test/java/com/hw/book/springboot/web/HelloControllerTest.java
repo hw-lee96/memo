@@ -1,9 +1,13 @@
 package com.hw.book.springboot.web;
 
+import com.hw.book.springboot.config.auth.SecurityConfig;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.FilterType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -17,7 +21,14 @@ import static org.hamcrest.Matchers.is;
 
 // 선언할 경우 @Controller, @ControllerAdvice 등을 사용할 수 있음
 // @Service, @Component, @Repository 등은 사용 못함
-@WebMvcTest(controllers = HelloController.class)
+
+// @WebMvcTest는 CustomOAuth2UserService를 스캔하지 않음
+// @Repository, @Service, @Component는 스캔 대상이 아님
+// SecurityConfig는 읽었지만, 그걸 생성하기 위해 필요한 CustomOAuth2UserService는 읽을수가 없어 에러가 발생함
+// 그렇기 때문에 스캔 대상에서 SecurityConfig를 제거
+@WebMvcTest(controllers = HelloController.class, excludeFilters = {
+                @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = SecurityConfig.class)
+            })
 public class HelloControllerTest {
 
     // 스프링이 관리하는 Bean을 주입 받음
@@ -25,7 +36,9 @@ public class HelloControllerTest {
     // 웹 API를 테스트할 때 사용하며, HTTP GET, POST 등에 대한 API 테스트를 할 수 있음
     private MockMvc mvc;
 
+
     @Test
+    @WithMockUser(roles="USER")
     public void returnToHello() throws Exception {  // 해당 라인 좌측의 화살표(라인 숫자 바로 옆)를 클릭하여 해당 메소드를 실행시킬 수 있다.
         String hello = "hello";
 
@@ -41,6 +54,7 @@ public class HelloControllerTest {
     }
 
     @Test
+    @WithMockUser(roles="USER")
     public void returnToHelloDto() throws Exception {
         String name = "hello";
         int amount = 1000;

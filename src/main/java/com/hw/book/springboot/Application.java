@@ -5,7 +5,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 // JPA Auditing 활성화
-@EnableJpaAuditing
+// > @SpringBootSApplication 와 함께 있다보니 @WebMvcTest 에서도 스캔하게 되어 에러  발생
+// >> 둘을 분리
+//@EnableJpaAuditing
+
 // @SpringBootApplication 어노테이션이 있는 위치부터 설정을 읽어가게 됨
 // 해당 클래스 main 메소드의 SpringApplication.run 으로 인해 내장 WAS를 실행하게된다.
 // 스프링 부트의 자동 설정, 스프링 Bean 읽기 및 생성을 자동화
