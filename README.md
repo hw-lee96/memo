@@ -175,3 +175,21 @@
        
  - 현재는 DB를 H2로 사용하고 있기 때문에 재시작 시 여전히 초기화가 된다. (스프링 재시작 시 H2도 재시작 되기 때문에)
     - 추후 AWS의 DB 서비스인 RDS(Relational Database Servie)를 사용하여 해결 예정
+
+5.1.6. 네이버 로그인
+ - application-oauth.properties 설정
+   - 설정 내용 중 user-name-attribute를 response로 해야 함 (네이버 회원 조회 시 반환되는 JSON 형태 때문)
+     - JSON 이 아래와 같은 형태이기 때문에 하위 필드는 명시할 수 없음. 
+ {
+     "resultcode" : "00",
+     "message" : "success",
+     "response" : {
+        ~~~ 
+    }
+ }
+
+5.1.7. 테스트 진행
+ - src/main 과 src/test의 환경 차이로 인해 에러 발생
+   - test에 application.properties 가 없으면 main에서 가져오게 됨
+   - 여기서 application-oauth.properties 파일은 가져오지 않기 때문에 에러가 발생
+   - test 하단에 application.properties 파일 생성 및 가짜 설정값을 추가하여 테스트가 진행 가능하도록 설정
