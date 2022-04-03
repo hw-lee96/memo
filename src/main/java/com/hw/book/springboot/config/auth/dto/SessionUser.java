@@ -4,6 +4,7 @@ import com.hw.book.springboot.domain.user.User;
 import lombok.Getter;
 
 @Getter
+// SessionUser 에서는 인증된 사용자 정보만을 필요로 함
 public class SessionUser {
     private String name;
     private String email;
@@ -15,3 +16,4 @@ public class SessionUser {
         this.picture = user.getPicture();
     }
 }
+ 
